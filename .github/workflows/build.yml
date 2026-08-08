@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build and test
+        run: ./gradlew testDebugUnitTest assembleRelease
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: compound-file-kt-release
+          path: build/outputs/aar/*-release.aar
+          if-no-files-found: error
