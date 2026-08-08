@@ -1,0 +1,22 @@
+schema: spec-driven
+
+context: |
+  CompoundFileKt is a focused standalone Kotlin Android library (minSdk 24) for
+  reading and creating Microsoft Compound File Binary (CFB/OLE2) containers.
+  The published coordinate is io.github.limarev:compound-file-kt and public
+  declarations use the io.github.limarev.compoundfile package.
+
+  The API is Kotlin-first, uses java.nio.channels.SeekableByteChannel (available
+  from Android API 24) for
+  random access, preserves caller ownership of channels, and processes large
+  streams incrementally. Public read and write capabilities are represented by
+  distinct types and resource lifetimes are scoped by Kotlin receiver blocks.
+  Preserve exact Unicode CFB entry names, including leading U+0006 and U+0009.
+
+rules:
+  specs:
+    - Use SHALL for normative requirements.
+    - Cover success, failure, ownership, and lifecycle behavior with scenarios.
+    - Keep the initial release scope separate from future extensions.
+  proposal:
+    - Include a Non-goals section when proposing a scope expansion.
